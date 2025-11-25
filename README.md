@@ -76,9 +76,49 @@ Compare the original modulating signal with the demodulated signal. PROCEDURE
 
 Program
 
+```
+Ac = 15.4;
+Am = 7.7;
+Fc = 4300;
+Fm = 430;
+Fs = 43000;
+t = 0:1/Fs:2/Fm;
+e1 = (Ac*sin(2*3.14*Fm*t));
+subplot(4,1,1);
+plot(t,e1);
+xgrid;
+title('Message Signal');
+xlabel('Time');
+ylabel('Amplitude');
 
+e2 = (Ac*sin(2*3.14*Fc*t));
+subplot(4,1,2);
+plot(t,e2);
+xgrid;
+title('Carrier Signal');
+xlabel('Time');
+ylabel('Amplitude');
+
+e3 = (Ac + (Am*sin(2*3.14*Fm*t))).*sin(2*3.14*Fc*t);
+subplot(4,1,3);
+plot(t,e3);
+xgrid;
+title('AM Modulated Signal');
+xlabel('Time');
+ylabel('Amplitude');
+
+demodulated_signal = abs(hilbert(e3)) - Ac;
+subplot(4,1,4);
+plot(t,demodulated_signal);
+xgrid;
+title('Demodulated Signal');
+xlabel('Time');
+ylabel('Amplitude');
+```
 
 Output Waveform
+
+<img width="760" height="587" alt="AM" src="https://github.com/user-attachments/assets/8633ca65-3ae8-4332-ad65-6e81064be2fd" />
 
 
 
@@ -86,11 +126,16 @@ Output Waveform
 
 TABULATION:
 
+![WhatsApp Image 2025-11-25 at 09 24 45_f4682867](https://github.com/user-attachments/assets/08bdd60f-493d-450f-a3d0-f02bbb382c1b)
+![WhatsApp Image 2025-11-25 at 09 24 45_8f5fd244](https://github.com/user-attachments/assets/14c7de1a-ee5e-4f5a-b6a6-0911db841f40)
+
+
+
 
 
 Calculation
-1.	ma (Theory) = am/ac =
-2.	ma(Practical) = (Emax-Emin)/(Emax+Emin) =
+1.	ma (Theory) = am/ac = 0.5
+2.	ma(Practical) = (Emax-Emin)/(Emax+Emin) = 5
 
 
 MODEL GRAPH
